@@ -2953,7 +2953,6 @@ public class Launcher extends Activity
         }
 
         setPivotsForZoom(fromView, scaleFactor);
-        showHotseat(animated);
         if (animated) {
             final LauncherViewPropertyAnimator scaleAnim =
                     new LauncherViewPropertyAnimator(fromView);
@@ -3142,44 +3141,6 @@ public class Launcher extends Activity
 
     void unlockAllApps() {
         // TODO
-    }
-
-    /**
-     * Shows the hotseat area.
-     */
-    void showHotseat(boolean animated) {
-        if (!LauncherAppState.getInstance().isScreenLarge()) {
-            if (animated) {
-                if (mHotseat.getAlpha() != 1f) {
-                    int duration = 0;
-                    if (mSearchDropTargetBar != null) {
-                        duration = mSearchDropTargetBar.getTransitionInDuration();
-                    }
-                    mHotseat.animate().alpha(1f).setDuration(duration);
-                }
-            } else {
-                mHotseat.setAlpha(1f);
-            }
-        }
-    }
-
-    /**
-     * Hides the hotseat area.
-     */
-    void hideHotseat(boolean animated) {
-        if (!LauncherAppState.getInstance().isScreenLarge()) {
-            if (animated) {
-                if (mHotseat.getAlpha() != 0f) {
-                    int duration = 0;
-                    if (mSearchDropTargetBar != null) {
-                        duration = mSearchDropTargetBar.getTransitionOutDuration();
-                    }
-                    mHotseat.animate().alpha(0f).setDuration(duration);
-                }
-            } else {
-                mHotseat.setAlpha(0f);
-            }
-        }
     }
 
     /**

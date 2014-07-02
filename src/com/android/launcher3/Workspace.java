@@ -54,10 +54,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.TextView;
@@ -1971,7 +1968,7 @@ public class Workspace extends SmoothPagedView
         final boolean stateIsSmall = (state == State.SMALL);
         final boolean stateIsOverview = (state == State.OVERVIEW);
         float finalBackgroundAlpha = (stateIsSpringLoaded || stateIsOverview) ? 1.0f : 0f;
-        float finalHotseatAndPageIndicatorAlpha = (stateIsOverview || stateIsSmall) ? 0f : 1f;
+        float finalPageIndicatorAlpha = (stateIsOverview || stateIsSmall) ? 0f : 1f;
         float finalOverviewPanelAlpha = stateIsOverview ? 1f : 0f;
         float finalSearchBarAlpha = !stateIsNormal ? 0f : 1f;
         float finalWorkspaceTranslationY = stateIsOverview ? getOverviewModeTranslationY() : 0;
@@ -2043,7 +2040,6 @@ public class Workspace extends SmoothPagedView
 
         final View searchBar = mLauncher.getQsbBar();
         final View overviewPanel = mLauncher.getOverviewPanel();
-        final View hotseat = mLauncher.getHotseat();
         if (animated) {
             anim.setDuration(duration);
             LauncherViewPropertyAnimator scale = new LauncherViewPropertyAnimator(this);
@@ -2086,21 +2082,17 @@ public class Workspace extends SmoothPagedView
             ObjectAnimator pageIndicatorAlpha = null;
             if (getPageIndicator() != null) {
                 pageIndicatorAlpha = ObjectAnimator.ofFloat(getPageIndicator(), "alpha",
-                        finalHotseatAndPageIndicatorAlpha);
+                        finalPageIndicatorAlpha);
             }
-            ObjectAnimator hotseatAlpha = ObjectAnimator.ofFloat(hotseat, "alpha",
-                    finalHotseatAndPageIndicatorAlpha);
             ObjectAnimator searchBarAlpha = ObjectAnimator.ofFloat(searchBar,
                     "alpha", finalSearchBarAlpha);
             ObjectAnimator overviewPanelAlpha = ObjectAnimator.ofFloat(overviewPanel,
                     "alpha", finalOverviewPanelAlpha);
 
             overviewPanelAlpha.addListener(new AlphaUpdateListener(overviewPanel));
-            hotseatAlpha.addListener(new AlphaUpdateListener(hotseat));
             searchBarAlpha.addListener(new AlphaUpdateListener(searchBar));
 
             if (workspaceToOverview) {
-                hotseatAlpha.setInterpolator(new DecelerateInterpolator(2));
             } else if (overviewToWorkspace) {
                 overviewPanelAlpha.setInterpolator(new DecelerateInterpolator(2));
             }
@@ -2110,17 +2102,14 @@ public class Workspace extends SmoothPagedView
             }
 
             anim.play(overviewPanelAlpha);
-            anim.play(hotseatAlpha);
             anim.play(searchBarAlpha);
             anim.play(pageIndicatorAlpha);
             anim.setStartDelay(delay);
         } else {
             overviewPanel.setAlpha(finalOverviewPanelAlpha);
             AlphaUpdateListener.updateVisibility(overviewPanel);
-            hotseat.setAlpha(finalHotseatAndPageIndicatorAlpha);
-            AlphaUpdateListener.updateVisibility(hotseat);
             if (getPageIndicator() != null) {
-                getPageIndicator().setAlpha(finalHotseatAndPageIndicatorAlpha);
+                getPageIndicator().setAlpha(finalPageIndicatorAlpha);
                 AlphaUpdateListener.updateVisibility(getPageIndicator());
             }
             searchBar.setAlpha(finalSearchBarAlpha);
