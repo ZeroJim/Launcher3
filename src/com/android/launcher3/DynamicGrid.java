@@ -211,9 +211,9 @@ class DeviceProfile {
         */
 
         // Hotseat
-        hotseatBarHeightPx = iconSizePx + 4 * edgeMarginPx;
-        hotseatCellWidthPx = iconSizePx;
-        hotseatCellHeightPx = iconSizePx;
+        hotseatBarHeightPx = 0; //iconSizePx + 4 * edgeMarginPx;
+        hotseatCellWidthPx = 0; //iconSizePx;
+        hotseatCellHeightPx = 0; //iconSizePx;
 
         // Folder
         folderCellWidthPx = cellWidthPx + 3 * edgeMarginPx;
@@ -422,42 +422,6 @@ class DeviceProfile {
         workspace.setPadding(padding.left, padding.top,
                 padding.right, padding.bottom);
         workspace.setLayoutParams(lp);
-
-        // Layout the hotseat
-        View hotseat = launcher.findViewById(R.id.hotseat);
-        lp = (FrameLayout.LayoutParams) hotseat.getLayoutParams();
-        if (hasVerticalBarLayout) {
-            // Vertical hotseat
-            lp.gravity = Gravity.RIGHT;
-            lp.width = hotseatBarHeightPx;
-            lp.height = LayoutParams.MATCH_PARENT;
-            hotseat.setPadding(0, 2 * edgeMarginPx,
-                    2 * edgeMarginPx, 2 * edgeMarginPx);
-        } else if (isTablet()) {
-            // Pad the hotseat with the grid gap calculated above
-            int gridGap = (int) ((widthPx - 2 * edgeMarginPx -
-                    (numColumns * cellWidthPx)) / (2 * (numColumns + 1)));
-            int gridWidth = (int) ((numColumns * cellWidthPx) +
-                    ((numColumns - 1) * gridGap));
-            int hotseatGap = (int) Math.max(0,
-                    (gridWidth - (numHotseatIcons * hotseatCellWidthPx))
-                            / (numHotseatIcons - 1));
-            lp.gravity = Gravity.BOTTOM;
-            lp.width = LayoutParams.MATCH_PARENT;
-            lp.height = hotseatBarHeightPx;
-            hotseat.setPadding(2 * edgeMarginPx + gridGap + hotseatGap, 0,
-                    2 * edgeMarginPx + gridGap + hotseatGap,
-                    2 * edgeMarginPx);
-        } else {
-            // For phones, layout the hotseat without any bottom margin
-            // to ensure that we have space for the folders
-            lp.gravity = Gravity.BOTTOM;
-            lp.width = LayoutParams.MATCH_PARENT;
-            lp.height = hotseatBarHeightPx;
-            hotseat.findViewById(R.id.layout).setPadding(2 * edgeMarginPx, 0,
-                    2 * edgeMarginPx, 0);
-        }
-        hotseat.setLayoutParams(lp);
 
         // Layout the page indicators
         View pageIndicator = launcher.findViewById(R.id.page_indicator);

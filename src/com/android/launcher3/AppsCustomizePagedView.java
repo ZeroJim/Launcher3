@@ -198,6 +198,7 @@ public class AppsCustomizePagedView extends PagedViewWithDraggableItems implemen
     private AccelerateInterpolator mAlphaInterpolator = new AccelerateInterpolator(0.9f);
     private DecelerateInterpolator mLeftScreenAlphaInterpolator = new DecelerateInterpolator(4);
 
+    /* true 不带程序抽屉； false 带程序抽屉 */
     public static boolean DISABLE_ALL_APPS = true;
 
     // Previews & outlines
