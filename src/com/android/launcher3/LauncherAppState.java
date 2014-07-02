@@ -69,6 +69,18 @@ public class LauncherAppState {
         sContext = context.getApplicationContext();
     }
 
+    private class CustomAppFilter extends AppFilter {
+
+        @Override
+        public boolean shouldShowApp(ComponentName app) {
+            Log.e(TAG, "Package name: " + app.getPackageName());
+            if (app.getPackageName().contains("com.google")) {
+                return true;
+            }
+            return false;
+        }
+    }
+
     private LauncherAppState() {
         if (sContext == null) {
             throw new IllegalStateException("LauncherAppState inited before app context set");
@@ -87,7 +99,8 @@ public class LauncherAppState {
         mWidgetPreviewCacheDb = new WidgetPreviewLoader.CacheDb(sContext);
         mIconCache = new IconCache(sContext);
 
-        mAppFilter = AppFilter.loadByName(sContext.getString(R.string.app_filter_class));
+//        mAppFilter = AppFilter.loadByName(sContext.getString(R.string.app_filter_class));
+        mAppFilter = new CustomAppFilter();
         mModel = new LauncherModel(this, mIconCache, mAppFilter);
 
         // Register intent receivers
