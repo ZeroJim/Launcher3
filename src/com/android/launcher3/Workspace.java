@@ -3905,7 +3905,6 @@ public class Workspace extends SmoothPagedView
 
     ArrayList<ComponentName> getUniqueComponents(boolean stripDuplicates, ArrayList<ComponentName> duplicates) {
         ArrayList<ComponentName> uniqueIntents = new ArrayList<ComponentName>();
-        getUniqueIntents((CellLayout) mLauncher.getHotseat().getLayout(), uniqueIntents, duplicates, false);
         int count = getChildCount();
         for (int i = 0; i < count; i++) {
             CellLayout cl = (CellLayout) getChildAt(i);
