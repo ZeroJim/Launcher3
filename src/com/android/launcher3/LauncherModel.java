@@ -2378,7 +2378,6 @@ public class LauncherModel extends BroadcastReceiver {
             // Query for the set of apps
             final long qiaTime = DEBUG_LOADERS ? SystemClock.uptimeMillis() : 0;
             List<ResolveInfo> apps = packageManager.queryIntentActivities(mainIntent, 0);
-            //TODO 获取所有app从这里进行筛选
             if (DEBUG_LOADERS) {
                 Log.d(TAG, "queryIntentActivities took "
                         + (SystemClock.uptimeMillis()-qiaTime) + "ms");
