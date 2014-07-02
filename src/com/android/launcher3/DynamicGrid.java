@@ -112,11 +112,6 @@ class DeviceProfile {
         iconTextSize = its;
         numHotseatIcons = hs;
         hotseatIconSize = his;
-        try {
-            throw new Exception();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     DeviceProfile(Context context,

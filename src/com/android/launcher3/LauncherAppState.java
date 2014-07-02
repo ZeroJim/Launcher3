@@ -73,7 +73,6 @@ public class LauncherAppState {
 
         @Override
         public boolean shouldShowApp(ComponentName app) {
-            Log.e(TAG, "Package name: " + app.getPackageName());
             if (app.getPackageName().contains("com.google")) {
                 return true;
             }
