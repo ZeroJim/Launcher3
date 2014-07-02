@@ -183,9 +183,9 @@ class DeviceProfile {
 
         // Search Bar
         searchBarSpaceMaxWidthPx = resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_max_width);
-        searchBarHeightPx = resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
+        searchBarHeightPx = 0; //resources.getDimensionPixelSize(R.dimen.dynamic_grid_search_bar_height);
         searchBarSpaceWidthPx = Math.min(searchBarSpaceMaxWidthPx, widthPx);
-        searchBarSpaceHeightPx = searchBarHeightPx + 2 * edgeMarginPx;
+        searchBarSpaceHeightPx = 0; //searchBarHeightPx + 2 * edgeMarginPx;
 
         // Calculate the actual text height
         Paint textPaint = new Paint();
